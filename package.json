@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-form-data": "^2.0.16",
+    "google-auth-library": "^7.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.6",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "node-localstorage": "^2.1.6",
+    "nodemon": "^2.0.7",
+    "socket.io": "^4.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
