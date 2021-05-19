@@ -51,6 +51,6 @@ app.get("/api/admin/first", checkAuth, userAdmin.first_admin, require("./routes/
 app.use("/api/admin", checkAuth, isAdmin, require("./routes/admin"));
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
+    app.use(express.static('build'));
 }
 
