@@ -49,3 +49,7 @@ app.use("/api/posts", require("./routes/posts"));
 app.get("/api/admin/first", checkAuth, userAdmin.first_admin, require("./routes/admin"));
 
 app.use("/api/admin", checkAuth, isAdmin, require("./routes/admin"));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html')); 
+})
