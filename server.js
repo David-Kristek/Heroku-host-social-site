@@ -50,6 +50,7 @@ app.get("/api/admin/first", checkAuth, userAdmin.first_admin, require("./routes/
 
 app.use("/api/admin", checkAuth, isAdmin, require("./routes/admin"));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'build', 'index.html')); 
-})
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+}
+
