@@ -6,17 +6,18 @@ const app = express();
 const checkAuth = require("./lib/chectAuth");
 const isAdmin = require("./lib/isAdmin");
 const userAdmin = require("./controllers/Admin/UserAdminController");
-const http = require("http").Server(app);
-const io = require("socket.io")(http, {
-  cors: {
-    origin: "*",
-  },
-});
+const http = require("http");
+// Server(app);
+// const io = require("socket.io")(http, {
+//   cors: {
+//     origin: "*",
+//   },
+// });
 const cors = require("cors");
 const morgan = require("morgan");
 
 const port = process.env.PORT || 3000;
- 
+
 mongoose
   .connect(process.env.DB_CONNECTION, {
     useNewUrlParser: true,
@@ -24,7 +25,12 @@ mongoose
   })
   .then((result) => {
     console.log("Database connected");
-    http.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+    const server = http.createServer((req, res) => {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "text/html");
+      res.end("<h1>Welcome to server created by David Kristek</h1>");
+    });
+    // http.listen(PORT, () => console.log(`Server started on port ${PORT}`));
   })
   .catch((err) => console.log(err));
 
@@ -41,10 +47,9 @@ app.use(morgan("dev"));
 // sockets :
 require("./Sockets")(io);
 
-
-app.get("/", (req, res) => {
-  res.json({"msg" : "Welcome to server created by David Kristek"})
-});
+// app.get("/", (req, res) => {
+//   res.json({"msg" : "Welcome to server created by David Kristek"})
+// });
 
 // server.listen(port, () => {
 //   console.log(`Server running at port ` + port);
