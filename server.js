@@ -17,7 +17,15 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const port = process.env.PORT || 3000;
-
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "text/html");
+  res.end("<h1>Welcome to server created by David Kristek</h1>");
+});
+// http.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+server.listen(port, () => {
+  console.log(`Server running at port ` + port);
+});
 mongoose
   .connect(process.env.DB_CONNECTION, {
     useNewUrlParser: true,
