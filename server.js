@@ -31,6 +31,9 @@ mongoose
       res.end("<h1>Welcome to server created by David Kristek</h1>");
     });
     // http.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+    server.listen(port, () => {
+      console.log(`Server running at port ` + port);
+    });
   })
   .catch((err) => console.log(err));
 
