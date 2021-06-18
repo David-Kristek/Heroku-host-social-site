@@ -5,27 +5,20 @@ const app = express();
 
 const checkAuth = require("./lib/chectAuth");
 const isAdmin = require("./lib/isAdmin");
-const userAdmin = require("./controllers/Admin/UserAdminController");
-const http = require("http");
-// Server(app);
-// const io = require("socket.io")(http, {
-//   cors: {
-//     origin: "*",
-//   },
-// });
+const userAdmin = require('./controllers/Admin/UserAdminController');
+const http = require("http").Server(app);
+const io = require("socket.io")(http, {
+  cors: {
+    origin: "*",
+  },
+});
+
+dotenv.config();
 const cors = require("cors");
 const morgan = require("morgan");
 
-const port = process.env.PORT || 3000;
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/html");
-  res.end("<h1>Welcome to server created by David Kristek</h1>");
-});
-// http.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-server.listen(port, () => {
-  console.log(`Server running at port ` + port);
-});
+const PORT = process.env.PORT || 5000;
+http.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 mongoose
   .connect(process.env.DB_CONNECTION, {
     useNewUrlParser: true,
@@ -33,35 +26,26 @@ mongoose
   })
   .then((result) => {
     console.log("Database connected");
-    const server = http.createServer((req, res) => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "text/html");
-      res.end("<h1>Welcome to server created by David Kristek</h1>");
-    });
-    // http.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-    server.listen(port, () => {
-      console.log(`Server running at port ` + port);
-    });
   })
   .catch((err) => console.log(err));
-
-// const server = http.createServer((req, res) => {
-//   res.statusCode = 200;
-//   res.setHeader("Content-Type", "text/html");
-//   res.end("<h1>Hello World</h1>");
-// });
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 // sockets :
-// require("./Sockets")(io);
+require("./Sockets")(io);
 
-// app.get("/", (req, res) => {
-//   res.json({"msg" : "Welcome to server created by David Kristek"})
-// });
+const test = () => {
+  console.log("healllo");
+};
 
-// server.listen(port, () => {
-//   console.log(`Server running at port ` + port);
-// });
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/category", require("./routes/category"));
+app.use("/api/posts", require("./routes/posts"));
+
+
+// first admin route
+app.get("/api/admin/first", checkAuth, userAdmin.first_admin, require("./routes/admin"));
+
+app.use("/api/admin", checkAuth, isAdmin, require("./routes/admin"));
