@@ -48,7 +48,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 // sockets :
-require("./Sockets")(io);
+// require("./Sockets")(io);
 
 // app.get("/", (req, res) => {
 //   res.json({"msg" : "Welcome to server created by David Kristek"})
