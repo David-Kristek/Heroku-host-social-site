@@ -18,7 +18,6 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const PORT = process.env.PORT || 5000;
-http.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 mongoose
   .connect(process.env.DB_CONNECTION, {
     useNewUrlParser: true,
@@ -26,6 +25,8 @@ mongoose
   })
   .then((result) => {
     console.log("Database connected");
+    http.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
   })
   .catch((err) => console.log(err));
 
