@@ -7,10 +7,9 @@ const validate = new Validation();
 
 class AuthController {
   async register(req, res) {
-    req.body = await JSON.parse(req.body.body);
-    console.log(req.body);
+    // req.body = await JSON.parse(req.body.body);
     const { error } = validate.register(req.body); //dodelat uploadnuti obrazku
-    if (error) return res.status(200).send(error.details[0].message);
+    if (error) return res.json({ error: error.details[0].message });
 
     const emailExist = await User.findOne({ email: req.body.email });
     if (emailExist) return res.status(200).send("Email already exists");
@@ -25,14 +24,14 @@ class AuthController {
     });
     try {
       const save = await user.save();
-      return res.send("Succesfully registered");
+      return res.send("success");
     } catch (err) {
       return res.status(200).send(err);
     }
   }
   async login(req, res) {
-    //uncomment for postman
-    req.body = await JSON.parse(req.body.body);  
+    //comment for postman
+    // req.body = await JSON.parse(req.body.body);  
     const { error } = validate.login(req.body);
     if (error) return res.json({ error: error.details[0].message });
 
