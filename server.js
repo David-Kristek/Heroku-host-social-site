@@ -50,3 +50,5 @@ app.use("/api/posts", require("./routes/posts"));
 app.get("/api/admin/first", checkAuth, userAdmin.first_admin, require("./routes/admin"));
 
 app.use("/api/admin", checkAuth, isAdmin, require("./routes/admin"));
+// images: 
+app.use('/static', express.static('assets'))

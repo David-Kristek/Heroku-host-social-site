@@ -16,8 +16,11 @@ class CategoryController {
         y: parseFloat(req.body.location[1]),
         label: req.body.place,
       };
+    } else if (req.body.place) {
+      locationCoors = {
+        label: req.body.place,
+      };
     }
-    console.log(typeof req.body.categories);
     var categoriesArr = req.body.categories;
     if (typeof req.body.categories === "string")
       categoriesArr = [categoriesArr];
@@ -56,7 +59,6 @@ class CategoryController {
   }
   upload_image(req, res, next) {
     if (!req.user) return;
-    console.log(req.body);
     const { error } = validate.post(req.body);
     if (error) {
       console.log(error);
@@ -117,13 +119,14 @@ class CategoryController {
     return res.json({ msg: "commented" });
   }
   async get_post_comments(postId) {
-    const post = await Post.findById(postId).populate("comments.commentedByUser"); 
-    return post.comments.reverse(); 
+    const post = await Post.findById(postId).populate(
+      "comments.commentedByUser"
+    );
+    return post.comments.reverse();
   }
   async get_like_count(postId) {
-    const post = await Post.findById(postId); 
-    return post.likedByUsers.length; 
+    const post = await Post.findById(postId);
+    return post.likedByUsers.length;
   }
-
 }
 module.exports = CategoryController;
