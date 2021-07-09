@@ -8,6 +8,7 @@ const getComments = (socket, postId) => {
 };
 const getLikeCount = (socket, postId) => {
   posts.get_like_count(postId).then((res) => {
+    console.log(res); 
     socket.broadcast.emit("getLikeCount", res);
   });
 };
