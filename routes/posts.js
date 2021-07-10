@@ -15,22 +15,25 @@ var storage = multer.diskStorage({
     cb(null, Date.now().toString() + "-" + file.originalname);
   },
 });
-var upload = multer({
-  storage: storage,
-  fileFilter: (req, file, cb) => {
-    if (
-      file.mimetype == "image/png" ||
-      file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg"
-    ) {
-      cb(null, true);
-    } else {
-      cb(null, false);
-      // return res.json({err: "Only .png, .jpg and .jpeg format allowed!"})
-      return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
-    }
-  },
-});
+const fileUpload = multer()
+
+// var upload = multer({
+//   storage: storage,
+//   fileFilter: (req, file, cb) => {
+//     if (
+//       file.mimetype == "image/png" ||
+//       file.mimetype == "image/jpg" ||
+//       file.mimetype == "image/jpeg"
+//     ) {
+//       cb(null, true);
+//     } else {
+//       cb(null, false);
+//       // return res.json({err: "Only .png, .jpg and .jpeg format allowed!"})
+//       return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+//     }
+//   },
+// });
+var upload = multer();
 
 const post = new PostController();
 
@@ -39,13 +42,13 @@ router.get("/", post.get);
 router.post(
   "/add",
   checkAuth,
-  upload.array("images", 5),
-  post.upload_image,
+  fileUpload.array("images", 5),
+  // post.upload_image,
   post.add
 );
 
-router.get("/like/:id", checkAuth,post.like_post); 
+router.get("/like/:id", checkAuth, post.like_post);
 
-router.post("/comment/:id", checkAuth,post.comment_post); 
+router.post("/comment/:id", checkAuth, post.comment_post);
 
 module.exports = router;

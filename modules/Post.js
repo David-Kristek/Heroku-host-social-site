@@ -9,7 +9,6 @@ const postSchema = new Schema(
       type: String,
     },
     description: {
-      required: true,
       type: String,
     },
     categories: {

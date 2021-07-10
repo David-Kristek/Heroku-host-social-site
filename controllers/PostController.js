@@ -3,12 +3,32 @@ const Post = require("../modules/Post");
 const multer = require("multer");
 const Validation = require("../lib/validation");
 const { array } = require("@hapi/joi");
+const { cloudinary } = require("../lib/cloudinary");
+const streamifier = require("streamifier");
 
 const validate = new Validation();
 class CategoryController {
   async add(req, res) {
-    if (req.body.images)
-      req.body.images = req.body.images.map((file) => file.filename); //to array
+    var imagesForDb = [];
+    if (!req.user) return;
+    const { error } = validate.post(req.body);
+    if (error) {
+      console.log(error);
+      return res.status(200).json({ err: error.details[0].message });
+    }
+    try {
+      const images = req.files;
+      for (const image of images) {
+        let result = await streamUpload(image);
+        imagesForDb.push(result.secure_url);
+      }
+    } catch (err) {
+      console.log(err, "error");
+      return res.json({ err: err });
+    }
+
+    // if (req.body.images)
+    //   req.body.images = req.body.images.map((file) => file.filename); //to array
     var locationCoors;
     if (req.body.location) {
       locationCoors = {
@@ -31,7 +51,7 @@ class CategoryController {
       categories: req.body.categories,
       p: categoriesArr,
       location: locationCoors,
-      images: req.body.images,
+      images: imagesForDb,
       createdByUser: req.user._id,
     });
     try {
@@ -128,5 +148,17 @@ class CategoryController {
     const post = await Post.findById(postId);
     return post.likedByUsers.length;
   }
+}
+function streamUpload(image) {
+  return new Promise((resolve, reject) => {
+    let stream = cloudinary.uploader.upload_stream((error, result) => {
+      if (result) {
+        resolve(result);
+      } else {
+        reject(error);
+      }
+    });
+    streamifier.createReadStream(image.buffer).pipe(stream);
+  });
 }
 module.exports = CategoryController;
