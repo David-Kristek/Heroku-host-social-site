@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
     cb(null, Date.now().toString() + "-" + file.originalname);
   },
 });
-const fileUpload = multer()
+const fileUpload = multer();
 
 // var upload = multer({
 //   storage: storage,
@@ -33,8 +33,6 @@ const fileUpload = multer()
 //     }
 //   },
 // });
-var upload = multer();
-
 const post = new PostController();
 
 router.get("/", post.get);

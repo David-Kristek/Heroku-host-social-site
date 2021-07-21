@@ -5,6 +5,7 @@ const Validation = require("../lib/validation");
 const { array } = require("@hapi/joi");
 const { cloudinary } = require("../lib/cloudinary");
 const streamifier = require("streamifier");
+const sharp = require("sharp");
 
 const validate = new Validation();
 class CategoryController {
@@ -158,7 +159,12 @@ function streamUpload(image) {
         reject(error);
       }
     });
-    streamifier.createReadStream(image.buffer).pipe(stream);
+    sharp(image.buffer)
+      .jpeg({ quality: 80 })
+      .toBuffer()
+      .then((buffer) => {
+        streamifier.createReadStream(buffer).pipe(stream);
+      });
   });
 }
 module.exports = CategoryController;
