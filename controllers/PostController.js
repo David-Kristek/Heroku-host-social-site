@@ -45,7 +45,6 @@ class CategoryController {
     var categoriesArr = req.body.categories;
     if (typeof req.body.categories === "string")
       categoriesArr = [categoriesArr];
-
     const post = new Post({
       name: req.body.name,
       description: req.body.description,
@@ -54,6 +53,7 @@ class CategoryController {
       location: locationCoors,
       images: imagesForDb,
       createdByUser: req.user._id,
+      groupPassword: req.headers.grouppassword,
     });
     try {
       const save = await post.save();
@@ -64,7 +64,7 @@ class CategoryController {
     }
   }
   async get(req, res) {
-    const posts = await Post.find()
+    const posts = await Post.find({ groupPassword: req.headers.grouppassword })
       .sort({ createdAt: -1 })
       .populate({
         path: "categories",

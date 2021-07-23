@@ -44,7 +44,7 @@ const test = () => {
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/category", require("./routes/category"));
 app.use("/api/posts", require("./routes/posts"));
-
+app.use("/api/groups", require("./routes/group"));
 
 // first admin route
 app.get("/api/admin/first", checkAuth, userAdmin.first_admin, require("./routes/admin"));

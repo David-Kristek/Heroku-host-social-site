@@ -25,7 +25,7 @@ const postSchema = new Schema(
     },
     comments: [
       {
-          text: String,
+        text: String,
         commentedByUser: {
           type: mongoose.Schema.Types.ObjectId, //lepsi dalsi model
           ref: "User",
@@ -39,6 +39,10 @@ const postSchema = new Schema(
     likedByUsers: {
       type: [mongoose.Schema.Types.ObjectId],
       ref: "User",
+    },
+    groupPassword: {
+      // require: true,
+      type: String,
     },
   },
   {
