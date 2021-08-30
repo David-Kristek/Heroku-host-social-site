@@ -161,6 +161,7 @@ function streamUpload(image) {
     });
     sharp(image.buffer)
       .jpeg({ quality: 80 })
+      .withMetadata()
       .toBuffer()
       .then((buffer) => {
         streamifier.createReadStream(buffer).pipe(stream);
