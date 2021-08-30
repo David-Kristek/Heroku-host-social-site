@@ -6,5 +6,7 @@ const Group = new GroupController();
 
 router.post("/add", checkAuth, Group.add)
 router.post("/checkPsw", checkAuth ,Group.checkPsw); 
+router.get("/getName", Group.getName); 
+
 
 module.exports = router;

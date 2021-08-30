@@ -33,5 +33,15 @@ class GroupController {
     }
     return res.json({ err: "no group found" });
   }
+  async getName(req, res) {
+    if (!req.query.groupPassword) {
+      res.send("Není zadáno heslo");
+    }
+    const group = await Group.findOne({
+      password: req.query.groupPassword,
+    });
+    console.log(group.name);  
+    res.json({ groupname: group.name });
+  }
 }
 module.exports = GroupController;

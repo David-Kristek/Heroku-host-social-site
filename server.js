@@ -37,15 +37,12 @@ app.use(morgan("dev"));
 // sockets :
 require("./Sockets")(io);
 
-const test = () => {
-  console.log("healllo");
-};
 
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/category", require("./routes/category"));
 app.use("/api/posts", require("./routes/posts"));
 app.use("/api/groups", require("./routes/group"));
-
+app.use("/api/chat", require("./routes/chat"))
 // first admin route
 app.get("/api/admin/first", checkAuth, userAdmin.first_admin, require("./routes/admin"));
 
