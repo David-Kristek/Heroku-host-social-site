@@ -6,6 +6,7 @@ const { array } = require("@hapi/joi");
 const { cloudinary } = require("../lib/cloudinary");
 const streamifier = require("streamifier");
 const sharp = require("sharp");
+var Notification = require("./NotificationController");
 
 const validate = new Validation();
 class CategoryController {
@@ -57,6 +58,20 @@ class CategoryController {
     });
     try {
       const save = await post.save();
+      Notification.sendNotification(
+        {
+          email: req.user.email,
+          type: "groupPassword",
+          groupPassword: req.headers.grouppassword,
+        },
+        {
+          title: `Nová příspěvek od ${req.user.name}`,
+          body:
+            req.body.name.length > 60
+              ? req.body.name.slice(0, 60) + "..."
+              : req.body.name,
+        }
+      );
       return res.json({ msg: "Post added" });
     } catch (err) {
       console.log(err, "error");

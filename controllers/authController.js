@@ -31,7 +31,7 @@ class AuthController {
   }
   async login(req, res) {
     //comment for postman
-    // req.body = await JSON.parse(req.body.body);  
+    // req.body = await JSON.parse(req.body.body);
     const { error } = validate.login(req.body);
     if (error) return res.json({ error: error.details[0].message });
 
@@ -39,7 +39,13 @@ class AuthController {
     if (!user) return res.json({ error: "Email or password is wrong" });
     if (user.password === "google-log")
       return res.json({ error: "Please log in with google" });
-
+    if (req.body.expotoken) {
+      await User.updateOne(
+        { email: user.email },
+        { expotoken: req.body.expotoken }
+      );
+      console.log(req.body.expotoken);
+    }
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) return res.json({ error: "Email or password is wrong" });
     const token = jwt.sign(
@@ -54,7 +60,7 @@ class AuthController {
         name: user.name,
         email: user.email,
         picture: user.image,
-        _id: user._id, 
+        _id: user._id,
       },
     });
     // return res.send("Logged in");

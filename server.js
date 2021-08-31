@@ -5,7 +5,7 @@ const app = express();
 
 const checkAuth = require("./lib/chectAuth");
 const isAdmin = require("./lib/isAdmin");
-const userAdmin = require('./controllers/Admin/UserAdminController');
+const userAdmin = require("./controllers/Admin/UserAdminController");
 const http = require("http").Server(app);
 const io = require("socket.io")(http, {
   cors: {
@@ -26,7 +26,6 @@ mongoose
   .then((result) => {
     console.log("Database connected");
     http.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-
   })
   .catch((err) => console.log(err));
 
@@ -37,15 +36,20 @@ app.use(morgan("dev"));
 // sockets :
 require("./Sockets")(io);
 
-
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/category", require("./routes/category"));
 app.use("/api/posts", require("./routes/posts"));
 app.use("/api/groups", require("./routes/group"));
-app.use("/api/chat", require("./routes/chat"))
+app.use("/api/chat", require("./routes/chat"));
+app.use("/api/notification", require("./routes/notification"));
 // first admin route
-app.get("/api/admin/first", checkAuth, userAdmin.first_admin, require("./routes/admin"));
+app.get(
+  "/api/admin/first",
+  checkAuth,
+  userAdmin.first_admin,
+  require("./routes/admin")
+);
 
 app.use("/api/admin", checkAuth, isAdmin, require("./routes/admin"));
-// images: 
-app.use('/static', express.static('assets'))
+// images:
+app.use("/static", express.static("assets"));

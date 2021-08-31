@@ -29,6 +29,8 @@ const userSchema = new mongoose.Schema(
       isAdmin: Boolean,
       mainAdmin: Boolean,
     },
+    groupPassword: String,
+    expotoken: String,
   },
   { timestamps: true }
 );

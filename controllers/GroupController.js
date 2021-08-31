@@ -29,6 +29,10 @@ class GroupController {
     });
     console.log("group", group, req.body.groupPassword);
     if (group) {
+      await User.updateOne(
+        { email: req.user.email },
+        { groupPassword: req.body.groupPassword }
+      );
       return res.json({ name: group.name, createdBy: group.createdByUser });
     }
     return res.json({ err: "no group found" });
@@ -40,7 +44,7 @@ class GroupController {
     const group = await Group.findOne({
       password: req.query.groupPassword,
     });
-    console.log(group.name);  
+    console.log(group.name);
     res.json({ groupname: group.name });
   }
 }

@@ -13,6 +13,8 @@
     "cloudinary": "^1.26.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "expo-notifications": "^0.12.3",
+    "expo-server-sdk": "^3.6.0",
     "express": "^4.17.1",
     "express-form-data": "^2.0.16",
     "google-auth-library": "^7.0.4",
