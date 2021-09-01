@@ -23,12 +23,13 @@ const NotificationController = {
     if (type === "groupPassword") {
       const users = await User.find({ groupPassword });
       users.forEach((user) => {
-        if(user.email === useremail) continue; 
-        messages.push({
-          to: user.expotoken,
-          sound: "default",
-          ...messageProps,
-        });
+        if (user.email !== useremail) {
+          messages.push({
+            to: user.expotoken,
+            sound: "default",
+            ...messageProps,
+          });
+        }
       });
     }
     if (!messages) return;
