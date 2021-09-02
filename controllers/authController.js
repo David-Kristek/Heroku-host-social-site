@@ -55,6 +55,7 @@ class AuthController {
       },
       process.env.TOKEN_SECRET
     );
+    console.log(token, "token, logged");
     return res.json({
       token: token,
       user: {
