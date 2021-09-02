@@ -33,6 +33,7 @@ class AuthController {
     //comment for postman
     // req.body = await JSON.parse(req.body.body);
     const { error } = validate.login(req.body);
+    console.log(req.body);
     if (error) return res.json({ error: error.details[0].message });
 
     const user = await User.findOne({ email: req.body.email });
