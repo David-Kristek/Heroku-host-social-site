@@ -32,8 +32,8 @@ class AuthController {
   async login(req, res) {
     //comment for postman
     // req.body = await JSON.parse(req.body.body);
-    const { error } = validate.login(req.body.expotoken);
-    console.log(req.body);
+    const { error } = validate.login(req.body);
+    console.log(req.body.expotoken);
     if (error) return res.json({ error: error.details[0].message });
 
     const user = await User.findOne({ email: req.body.email });
@@ -44,11 +44,15 @@ class AuthController {
       JSON.stringify(req.body.expotoken).length,
       req.body.expotoken.length
     );
-    if (req.body.expotoken && JSON.stringify(req.body.expotoken).length > 50) {
-      await User.updateOne(
-        { email: user.email },
-        { expotoken: req.body.expotoken }
-      );
+    if (req.body.expotoken && JSON.stringify(req.body.expotoken).length < 50) {
+      try {
+        await User.updateOne(
+          { email: user.email },
+          { expotoken: req.body.expotoken }
+        );
+      } catch (err) {
+        console.log(err);
+      }
       console.log(req.body.expotoken);
     }
     const validPass = await bcrypt.compare(req.body.password, user.password);
