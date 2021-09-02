@@ -32,7 +32,7 @@ class AuthController {
   async login(req, res) {
     //comment for postman
     // req.body = await JSON.parse(req.body.body);
-    const { error } = validate.login(req.body);
+    const { error } = validate.login(req.body.expotoken);
     console.log(req.body);
     if (error) return res.json({ error: error.details[0].message });
 
@@ -40,7 +40,11 @@ class AuthController {
     if (!user) return res.json({ error: "Email or password is wrong" });
     if (user.password === "google-log")
       return res.json({ error: "Please log in with google" });
-    if (req.body.expotoken) {
+    console.log(
+      JSON.stringify(req.body.expotoken).length,
+      req.body.expotoken.length
+    );
+    if (req.body.expotoken && JSON.stringify(req.body.expotoken).length > 50) {
       await User.updateOne(
         { email: user.email },
         { expotoken: req.body.expotoken }
