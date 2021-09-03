@@ -16,14 +16,14 @@ const NotificationController = {
   ) => {
     let messages = [];
     if (type === "useremail") {
-      const user = await User.findOne({ email: txt });
+      const user = await User.findOne({ email: useremail });
       const userToken = user.expotoken;
       messages = [{ to: userToken, sound: "default", ...messageProps }];
     }
     if (type === "groupPassword") {
       const users = await User.find({ groupPassword });
       users.forEach((user) => {
-        if (user.email !== useremail) {
+        if (user.email !== useremail && user.expotoken) {
           messages.push({
             to: user.expotoken,
             sound: "default",

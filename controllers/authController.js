@@ -40,11 +40,7 @@ class AuthController {
     if (!user) return res.json({ error: "Email or password is wrong" });
     if (user.password === "google-log")
       return res.json({ error: "Please log in with google" });
-    console.log(
-      JSON.stringify(req.body.expotoken).length,
-      req.body.expotoken.length
-    );
-    if (req.body.expotoken && JSON.stringify(req.body.expotoken).length < 50) {
+    if (req.body.expotoken && (JSON.stringify(req.body.expotoken).length < 50 || req.body.expotoken.length < 50)) {
       try {
         await User.updateOne(
           { email: user.email },

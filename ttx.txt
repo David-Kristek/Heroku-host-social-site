@@ -1,0 +1,155 @@
+nativeStackAndroid: [
+  {
+    lineNumber: 11,
+    file: 'ExportedModule.java',
+    methodName: 'invokeExportedMethod',
+    class: 'n.e.b.c'
+  },
+  {
+    lineNumber: 7,
+    file: 'NativeModulesProxy.java',
+    methodName: 'callMethod',
+    class: 'org.unimodules.adapters.react.NativeModulesProxy'
+  },
+  {
+    lineNumber: -2,
+    file: 'Method.java',
+    methodName: 'invoke',
+    class: 'java.lang.reflect.Method'
+  },
+  {
+    lineNumber: 18,
+    file: 'JavaMethodWrapper.java',
+    methodName: 'invoke',
+    class: 'com.facebook.react.bridge.JavaMethodWrapper'
+  },
+  {
+    lineNumber: 2,
+    file: 'JavaModuleWrapper.java',
+    methodName: 'invoke',
+    class: 'com.facebook.react.bridge.JavaModuleWrapper'
+  },
+  {
+    lineNumber: -2,
+    file: 'NativeRunnable.java',
+    methodName: 'run',
+    class: 'com.facebook.react.bridge.queue.NativeRunnable'
+  },
+  {
+    lineNumber: 883,
+    file: 'Handler.java',
+    methodName: 'handleCallback',
+    class: 'android.os.Handler'
+  },
+  {
+    lineNumber: 100,
+    file: 'Handler.java',
+    methodName: 'dispatchMessage',
+    class: 'android.os.Handler'
+  },
+  {
+    lineNumber: 1,
+    file: 'MessageQueueThreadHandler.java',
+    methodName: 'dispatchMessage',
+    class: 'com.facebook.react.bridge.queue.MessageQueueThreadHandler'
+  },
+  {
+    lineNumber: 224,
+    file: 'Looper.java',
+    methodName: 'loop',
+    class: 'android.os.Looper'
+  },
+  {
+    lineNumber: 8,
+    file: 'MessageQueueThreadImpl.java',
+    methodName: 'run',
+    class: 'com.facebook.react.bridge.queue.MessageQueueThreadImpl$4'
+  },
+  {
+    lineNumber: 919,
+    file: 'Thread.java',
+    methodName: 'run',
+    class: 'java.lang.Thread'
+  }
+],
+userInfo: null,
+message: 'Encountered an exception while calling native method: Exception occurred while executing exported method getDevicePushTokenAsync on module ExpoPushTokenManager: Please set your project ID. A valid Firebase project ID is required to communicate with Firebase server APIs: It identifies your project with Google.',
+code: 'E_UNEXPECTED_ERROR',
+line: 27,
+column: 1111,
+sourceURL: '/data/user/0/david.kristek.app/files/.expo-internal/a73bfa4fe5f9d2a3640e58e55dc06fb2'
+0mPOST /api/auth/login [32m200[0m 3.800 ms - 51[0m
+nativeStackAndroid: [
+  {
+    lineNumber: 11,
+    file: 'ExportedModule.java',
+    methodName: 'invokeExportedMethod',
+    class: 'n.e.b.c'
+  },
+  {
+    lineNumber: 7,
+    file: 'NativeModulesProxy.java',
+    methodName: 'callMethod',
+    class: 'org.unimodules.adapters.react.NativeModulesProxy'
+  },
+  {
+    lineNumber: -2,
+    file: 'Method.java',
+    methodName: 'invoke',
+    class: 'java.lang.reflect.Method'
+  },
+  {
+    lineNumber: 18,
+    file: 'JavaMethodWrapper.java',
+    methodName: 'invoke',
+    class: 'com.facebook.react.bridge.JavaMethodWrapper'
+  },
+  {
+    lineNumber: 2,
+    file: 'JavaModuleWrapper.java',
+    methodName: 'invoke',
+    class: 'com.facebook.react.bridge.JavaModuleWrapper'
+  },
+  {
+    lineNumber: -2,
+    file: 'NativeRunnable.java',
+    methodName: 'run',
+    class: 'com.facebook.react.bridge.queue.NativeRunnable'
+  },
+  {
+    lineNumber: 883,
+    file: 'Handler.java',
+    methodName: 'handleCallback',
+    class: 'android.os.Handler'
+  },
+  {
+    lineNumber: 100,
+    file: 'Handler.java',
+    methodName: 'dispatchMessage',
+    class: 'android.os.Handler'
+  },
+  {
+    lineNumber: 1,
+    file: 'MessageQueueThreadHandler.java',
+    methodName: 'dispatchMessage',
+    class: 'com.facebook.react.bridge.queue.MessageQueueThreadHandler'
+  },
+  {
+    lineNumber: 224,
+    file: 'Looper.java',
+    methodName: 'loop',
+    class: 'android.os.Looper'
+  },
+  {
+    lineNumber: 8,
+    file: 'MessageQueueThreadImpl.java',
+    methodName: 'run',
+    class: 'com.facebook.react.bridge.queue.MessageQueueThreadImpl$4'
+  },
+  {
+    lineNumber: 919,
+    file: 'Thread.java',
+    methodName: 'run',
+    class: 'java.lang.Thread'
+  }
+],
